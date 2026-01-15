@@ -24,12 +24,12 @@
             background-color: var(--deep-black); 
             color: var(--rebel-white);
             font-family: 'Lato', sans-serif;
-            overflow: hidden; /* Verhindert vertikales Scrollen des Bodys, da wir per Slide navigieren */
+            overflow: hidden; 
             height: 100vh;
             height: 100dvh;
         }
 
-        /* NAVIGATION & CONTROLS */
+        /* NAVIGATION & STEUERUNG */
         .controls {
             position: fixed;
             bottom: 20px;
@@ -56,7 +56,7 @@
 
         @media (max-width: 768px) {
             .nav-btn {
-                width: 60px; /* Größere Touch-Fläche für Mobile */
+                width: 60px;
                 height: 60px;
             }
         }
@@ -99,7 +99,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            overflow-y: auto; /* Erlaubt internes Scrollen, falls Inhalt zu lang ist */
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -117,7 +117,7 @@
             pointer-events: none;
         }
 
-        /* TYPOGRAPHY */
+        /* TYPOGRAFIE */
         h1, h2, h3 { font-family: 'Poppins', sans-serif; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
         h1 { font-size: clamp(32px, 8vw, 80px); font-weight: 800; line-height: 1.1; }
         h1 span { color: var(--neon-pink); display: block; }
@@ -125,7 +125,7 @@
         .slide-title { 
             font-size: clamp(22px, 4vw, 44px); 
             font-weight: 800; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             border-left: 8px solid var(--neon-pink); 
             padding-left: 15px; 
             text-align: left;
@@ -134,7 +134,7 @@
         p, li { font-size: clamp(16px, 2vw, 22px); line-height: 1.4; color: #DDD; }
         strong { color: var(--neon-pink); }
 
-        /* COMPONENTS */
+        /* KOMPONENTEN */
         .content-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -160,61 +160,64 @@
         .tile h3 { color: var(--neon-pink); margin-bottom: 10px; font-size: clamp(20px, 3vw, 26px); }
 
         .bullet-list { list-style: none; padding: 0; margin: 0; }
-        .bullet-list li { margin-bottom: 15px; padding-left: 40px; position: relative; }
-        .bullet-list li i { position: absolute; left: 0; color: var(--neon-pink); font-size: 24px; top: 2px; }
+        .bullet-list li { margin-bottom: 15px; padding-left: 45px; position: relative; }
+        .bullet-list li i { position: absolute; left: 0; color: var(--neon-pink); font-size: 26px; top: 2px; }
 
-        /* PINK ACRONYM STYLING */
+        /* PINK AKRONYM STYLING */
         .pink-acronym-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             margin: auto 0;
         }
 
         .acronym-row {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 10px 15px;
+            padding: 15px 20px;
             border-radius: 15px;
         }
 
         .acronym-letter {
             font-family: 'Poppins';
-            font-size: clamp(36px, 10vw, 60px);
+            font-size: clamp(36px, 8vw, 60px);
             font-weight: 800;
             color: var(--neon-pink);
-            width: 50px;
+            width: 60px;
             text-align: center;
+            flex-shrink: 0;
         }
 
-        .acronym-content h3 { font-size: clamp(18px, 4vw, 24px); color: var(--rebel-white); }
-        .acronym-content p { font-size: clamp(13px, 3vw, 16px); color: #AAA; }
+        .acronym-content h3 { font-size: clamp(18px, 4vw, 26px); color: var(--rebel-white); margin-bottom: 4px; }
+        .acronym-content p { font-size: clamp(14px, 2.5vw, 18px); color: #AAA; margin: 0; }
 
-        /* PROFILE CARD */
+        /* PROFIL KARTEN */
         .profile-card {
             display: flex;
             align-items: center;
             gap: 20px;
             background: var(--dark-gray);
-            padding: 15px;
+            padding: 20px;
             border-radius: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .profile-img {
-            width: 60px; height: 60px; 
-            border: 2px solid var(--neon-pink);
-            border-radius: 12px;
+            width: 70px; height: 70px; 
+            border: 3px solid var(--neon-pink);
+            border-radius: 15px;
             transform: rotate(45deg);
             display: flex; align-items: center; justify-content: center;
             background: rgba(255, 0, 127, 0.1);
             flex-shrink: 0;
         }
-        .profile-img i { transform: rotate(-45deg); font-size: 24px; color: var(--neon-pink); }
+        .profile-img i { transform: rotate(-45deg); font-size: 30px; color: var(--neon-pink); }
 
-        /* KONTAKT CARD */
+        /* KONTAKT KARTEN */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -225,12 +228,12 @@
         .contact-card {
             background: var(--dark-gray);
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
         .qr-placeholder {
-            width: 140px; height: 140px; background: white;
-            margin: 0 auto 15px; border-radius: 10px; padding: 5px;
+            width: 160px; height: 160px; background: white;
+            margin: 0 auto 15px; border-radius: 10px; padding: 10px;
         }
         .qr-placeholder img { width: 100%; height: 100%; }
 
@@ -255,168 +258,190 @@
     <div class="slides-container" id="slidesContainer">
         <div class="slides-wrapper" id="slidesWrapper">
             
-            <!-- SLIDE 1: INTRO -->
+            <!-- FOLIE 1: INTRO -->
             <div class="slide">
                 <div class="bg-accent" style="top: -10%; right: -10%;"></div>
                 <div style="margin: auto; text-align: center;">
                     <h1>WERDE EIN <span>REBEL!</span></h1>
-                    <p style="margin-top: 20px; color: #AAA;">Schluss mit langweiligem Handball. Starte deine neue Ära.</p>
-                    <div style="margin-top: 40px;">
+                    <p style="margin-top: 30px; color: #AAA; font-size: clamp(18px, 3vw, 24px);">Schluss mit langweiligem Handball. Starte deine neue Ära.</p>
+                    <div style="margin-top: 50px;">
                         <p style="font-weight: 800; color: var(--rebel-white); font-size: clamp(24px, 5vw, 32px);">PINK REBELS</p>
-                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: 16px;">
-                            HSG Rü/Bau/Kö | Damenhandball 2026
+                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: clamp(14px, 2vw, 18px);">
+                            HSG Rü/Bau/Kö | Damenhandball Neustart 2026
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 2: DER VIBE -->
+            <!-- FOLIE 2: DER VIBE -->
             <div class="slide">
                 <h2 class="slide-title">Warum die Rebels?</h2>
                 <div class="content-grid">
                     <div>
-                        <p>Lust auf einen Verein, der sich wie 2026 anfühlt?</p>
+                        <p>Du hast keine Lust mehr auf verstaubte Vereinsstrukturen? Wir auch nicht.</p>
                         <ul class="bullet-list">
-                            <li><i class="fas fa-fire"></i> <strong>Energy:</strong> Bock auf Power-Handball.</li>
-                            <li><i class="fas fa-star"></i> <strong>Style:</strong> Neonpink & Top-Branding.</li>
-                            <li><i class="fas fa-heart"></i> <strong>Community:</strong> Mehr als nur Training.</li>
+                            <li><i class="fas fa-fire"></i> <strong>Energy:</strong> Ein Team, das Bock auf modernen Power-Handball hat.</li>
+                            <li><i class="fas fa-star"></i> <strong>Style:</strong> Die geilsten Trikots der Liga und ein echtes Branding.</li>
+                            <li><i class="fas fa-heart"></i> <strong>Community:</strong> Zusammenhalt, der über die Halle hinausgeht.</li>
                         </ul>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: clamp(80px, 20vw, 140px); color: var(--neon-pink);"><i class="fas fa-hand-fist"></i></div>
+                        <div style="font-size: clamp(100px, 25vw, 160px); color: var(--neon-pink);"><i class="fas fa-hand-fist"></i></div>
+                        <p style="font-family: 'Poppins'; font-weight: 800; font-size: clamp(20px, 4vw, 36px);">DEIN TEAM. DEIN STYLE.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 3: P.I.N.K. -->
+            <!-- FOLIE 3: P.I.N.K. (SPIELERINNEN VERSION) -->
             <div class="slide">
-                <h2 class="slide-title">Unser P.I.N.K.</h2>
+                <h2 class="slide-title">Was dich erwartet: P.I.N.K.</h2>
                 <div class="pink-acronym-container">
                     <div class="acronym-row">
                         <div class="acronym-letter">P</div>
-                        <div class="acronym-content"><h3>Performance</h3><p>Modernes Coaching für dich.</p></div>
+                        <div class="acronym-content">
+                            <h3>Performance</h3>
+                            <p>Wir fördern deine Stärken mit modernem Coaching.</p>
+                        </div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">I</div>
-                        <div class="acronym-content"><h3>Individualität</h3><p>Du zählst im Team.</p></div>
+                        <div class="acronym-content">
+                            <h3>Individualität</h3>
+                            <p>Egal ob du reaktivieren willst oder Top-Talent bist – du zählst.</p>
+                        </div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">N</div>
-                        <div class="acronym-content"><h3>Next Level</h3><p>Bring dein Spiel auf eine neue Stufe.</p></div>
+                        <div class="acronym-content">
+                            <h3>Next Level</h3>
+                            <p>Bring dein Spiel und unser Team auf die nächste Stufe.</p>
+                        </div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">K</div>
-                        <div class="acronym-content"><h3>Kampfgeist</h3><p>Wachsen. Gewinnen. Feiern.</p></div>
+                        <div class="acronym-content">
+                            <h3>Kampfgeist</h3>
+                            <p>Gemeinsam wachsen. Gemeinsam gewinnen. Gemeinsam feiern.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 4: DAS VERSPRECHEN -->
+            <!-- FOLIE 4: DAS VERSPRECHEN -->
             <div class="slide">
-                <h2 class="slide-title">Unser Versprechen</h2>
+                <h2 class="slide-title">Unser Versprechen an dich</h2>
                 <div class="content-grid">
                     <div class="tile">
-                        <h3>Fokus auf Handball</h3>
-                        <p>Wir machen die Orga, du spielst.</p>
+                        <h3>Kein Stress, nur Handball</h3>
+                        <p>Wir kümmern uns um die Orga. Du konzentrierst dich auf dein Spiel und das Team.</p>
                     </div>
                     <div class="tile">
-                        <h3>Sichtbarkeit</h3>
-                        <p>Social Media Support für das Team.</p>
+                        <h3>Maximale Sichtbarkeit</h3>
+                        <p>Professionalisierung auf Social Media. Wir machen euch zu den Gesichtern der HSG.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 5: WER WIR SUCHEN -->
+            <!-- FOLIE 5: WER WIR SUCHEN -->
             <div class="slide">
                 <h2 class="slide-title">Suchst du uns?</h2>
                 <div style="margin: auto; width: 100%;">
                     <ul class="bullet-list">
-                        <li><i class="fas fa-check-double"></i> <strong>Reaktivierer:</strong> Vermisst du den Ball?</li>
-                        <li><i class="fas fa-check-double"></i> <strong>Young Guns:</strong> Du kommst aus der wA?</li>
-                        <li><i class="fas fa-check-double"></i> <strong>Wechsler:</strong> Lust auf etwas Neues?</li>
+                        <li><i class="fas fa-check-double"></i> <strong>Die Reaktivierer:</strong> Du hast früher gespielt und vermisst den Ball? Komm zurück!</li>
+                        <li><i class="fas fa-check-double"></i> <strong>Die Young Guns:</strong> Du spielst wA und willst ein Damen-Projekt, das brennt?</li>
+                        <li><i class="fas fa-check-double"></i> <strong>Die Wechsler:</strong> Du suchst eine neue Herausforderung in der Region?</li>
                     </ul>
-                    <p style="margin-top: 30px; text-align: center; color: var(--neon-pink);"><strong>Wir wollen dein Feuer!</strong></p>
+                    <p style="margin-top: 30px; text-align: center; font-size: clamp(20px, 4vw, 28px); color: var(--neon-pink);"><strong>Egal woher du kommst – wir wollen dein Feuer!</strong></p>
                 </div>
             </div>
 
-            <!-- SLIDE 6: TEAM & FUN -->
+            <!-- FOLIE 6: TEAM & FUN -->
             <div class="slide">
-                <h2 class="slide-title">Mehr als 60 Min.</h2>
+                <h2 class="slide-title">Mehr als 60 Minuten</h2>
                 <div class="content-grid">
                     <div class="tile">
-                        <h3>Events</h3>
-                        <p>Teambuilding & Kabinenpartys.</p>
+                        <h3>Team-Events</h3>
+                        <p>Trainingslager, Teambuilding und legendäre Kabinenpartys sind fest eingeplant.</p>
                     </div>
                     <div style="text-align: center; color: var(--neon-pink);">
-                        <i class="fas fa-glass-cheers" style="font-size: 80px;"></i>
+                        <div style="font-size: clamp(80px, 15vw, 120px);"><i class="fas fa-glass-cheers"></i></div>
+                        <p style="font-weight: 800; font-size: clamp(18px, 3vw, 24px);">REBELS DON'T JUST PLAY.<br>REBELS CELEBRATE.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 7: SAISONPLANUNG -->
+            <!-- FOLIE 7: SAISONPLANUNG -->
             <div class="slide">
-                <h2 class="slide-title">Saison & Groove</h2>
+                <h2 class="slide-title">Unser Plan: Saison & Groove</h2>
                 <div class="content-grid">
                     <div class="tile">
-                        <h3>Bezirksliga A</h3>
-                        <p>Bewusster Start ohne Druck.</p>
+                        <h3>Start: Bezirksliga</h3>
+                        <p>Wir fangen ganz bewusst in der Bezirksliga an. Kein Ergebnisdruck ab Minute 1, sondern Raum zum Finden.</p>
                     </div>
                     <div class="tile">
                         <h3>Einzugrooven</h3>
-                        <p>Als Einheit zusammenwachsen.</p>
+                        <p>Wir wollen als Einheit zusammenwachsen, Automatismen festigen und unsere Rebel-Identität entwickeln.</p>
                     </div>
                 </div>
-                <p style="margin-top: 20px; text-align: center; color: var(--neon-pink);"><strong>Erst die Basis, dann Dominanz.</strong></p>
+                <p style="margin-top: 20px; text-align: center; font-size: clamp(18px, 3vw, 22px); color: var(--neon-pink);"><strong>Erst die Basis, dann die Dominanz.</strong></p>
             </div>
 
-            <!-- SLIDE 8: MANAGEMENT -->
+            <!-- FOLIE 8: MANAGEMENT -->
             <div class="slide">
-                <h2 class="slide-title">Back-Office</h2>
+                <h2 class="slide-title">Wer den Rücken freihält</h2>
                 <div class="content-grid">
                     <div>
                         <div class="profile-card">
                             <div class="profile-img"><i class="fas fa-users-gear"></i></div>
-                            <div><h3>Lena Kugies</h3><p>Team-Spirit</p></div>
+                            <div>
+                                <h3>Lena Kugies</h3>
+                                <p style="font-size: 16px;">Deine Ansprechpartnerin für Orga & Team-Spirit.</p>
+                            </div>
                         </div>
                         <div class="profile-card">
                             <div class="profile-img"><i class="fas fa-chess-knight"></i></div>
-                            <div><h3>Kai-Uwe König</h3><p>Strategie</p></div>
+                            <div>
+                                <h3>Kai-Uwe König</h3>
+                                <p style="font-size: 16px;">Der Kopf hinter der Strategie & dem Sponsoring.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="tile">
-                        <h3>Support</h3>
-                        <p>Wir halten euch den Rücken frei.</p>
+                        <h3>Support-Garantie</h3>
+                        <p>Wir sind für euch da. Von der Trikotbestellung bis zum individuellen Sponsoring-Deal.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 9: KONTAKT -->
+            <!-- FOLIE 9: KONTAKT -->
             <div class="slide">
-                <h2 class="slide-title">Werde ein Rebel!</h2>
+                <h2 class="slide-title">Werde jetzt ein Rebel!</h2>
                 <div class="contact-grid">
                     <div class="contact-card">
                         <div class="qr-placeholder">
                             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BEGIN:VCARD%0AVERSION:3.0%0AFN:Lena%20Kugies%0AN:Kugies;Lena;;;%0AEMAIL:lenakugies99@web.de%0ATEL;TYPE=CELL:01637844242%0AORG:HSG%20Rue/Bau/Koe%0AEND:VCARD" alt="QR Lena">
                         </div>
                         <div class="contact-name">Schreib Lena</div>
+                        <p style="font-size: 13px; color: #888; margin: 5px 0 0 0;">Fragen zum Team oder Training?</p>
                     </div>
                     <div class="contact-card">
                         <div class="qr-placeholder">
                             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BEGIN:VCARD%0AVERSION:3.0%0AFN:Kai-Uwe%20Koenig%0AN:Koenig;Kai-Uwe;;;%0AEMAIL:kaiuwe.koenig@web.de%0ATEL;TYPE=CELL:015123008915%0AORG:HSG%20Rue/Bau/Koe%0AEND:VCARD" alt="QR Kai">
                         </div>
                         <div class="contact-name">Schreib Kai</div>
+                        <p style="font-size: 13px; color: #888; margin: 5px 0 0 0;">Interesse an Kooperation?</p>
                     </div>
                 </div>
-                <p style="margin-top: 20px; text-align: center; font-size: 16px; color: var(--neon-pink);"><strong>Scan den Code & sag "Hi!"</strong></p>
+                <p style="margin-top: 30px; text-align: center; font-size: clamp(16px, 3vw, 20px); color: var(--neon-pink);"><strong>Scan den Code & sag "Hi! Ich will ein Rebel werden."</strong></p>
             </div>
 
-            <!-- SLIDE 10: OUTRO -->
+            <!-- FOLIE 10: OUTRO -->
             <div class="slide">
                 <div style="margin: auto; text-align: center; width: 100%;">
-                    <h1>DEINE <span>REBELLION</span></h1>
-                    <h2 style="font-size: 28px; margin-top: 10px;">BEGINNT JETZT.</h2>
+                    <h1 style="font-size: clamp(40px, 10vw, 120px);">DEINE <span>REBELLION</span></h1>
+                    <h2 style="font-size: clamp(24px, 5vw, 40px); margin-top: 10px;">BEGINNT JETZT.</h2>
                     <div class="back-to-start-container">
-                        <button class="nav-btn" style="width: auto; border-radius: 10px; padding: 0 30px; font-weight: bold;" onclick="goToSlide(0)">
+                        <button class="nav-btn" style="width: auto; border-radius: 10px; padding: 0 40px; font-weight: bold;" onclick="goToSlide(0)">
                             ZURÜCK ZUM START
                         </button>
                     </div>
@@ -436,7 +461,7 @@
             wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
             progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
             
-            // Scroll Slide nach oben beim Wechsel
+            // Slide nach oben scrollen bei Wechsel (wichtig für mobile)
             slides[currentSlide].scrollTop = 0;
         }
 
@@ -459,25 +484,25 @@
             updateSlide();
         }
 
-        // Swipe Gestures für Mobile
+        // Swipe Gesten
         let touchstartX = 0;
         let touchendX = 0;
         
         document.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
-        });
+        }, {passive: true});
 
         document.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
             handleGesture();
-        });
+        }, {passive: true});
 
         function handleGesture() {
             if (touchendX < touchstartX - 50) nextSlide();
             if (touchendX > touchstartX + 50) prevSlide();
         }
 
-        // Keyboard Navigation
+        // Tastatur
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
