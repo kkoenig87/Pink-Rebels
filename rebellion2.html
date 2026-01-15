@@ -19,239 +19,103 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body { 
-            margin: 0; 
-            padding: 0; 
+            margin: 0; padding: 0; 
             background-color: var(--deep-black); 
             color: var(--rebel-white);
             font-family: 'Lato', sans-serif;
             overflow: hidden; 
-            height: 100vh;
             height: 100dvh;
+            position: relative;
         }
 
-        /* NAVIGATION & CONTROLS */
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-        }
+        /* BACKGROUND EFFECT */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; opacity: 0.35; }
 
+        /* NAVIGATION */
+        .controls { position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
         .nav-btn {
-            background: rgba(255, 0, 127, 0.15);
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--neon-pink);
-            color: var(--neon-pink);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(255, 0, 127, 0.15); backdrop-filter: blur(5px);
+            border: 2px solid var(--neon-pink); color: var(--neon-pink);
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
         }
+        @media (max-width: 768px) { .nav-btn { width: 60px; height: 60px; } }
+        .nav-btn:hover { background: var(--neon-pink); color: white; box-shadow: 0 0 15px var(--neon-pink); }
 
-        @media (max-width: 768px) {
-            .nav-btn {
-                width: 60px;
-                height: 60px;
-            }
-        }
-
-        .nav-btn:hover {
-            background: var(--neon-pink);
-            color: white;
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background: var(--neon-pink);
-            transition: width 0.3s ease;
-            z-index: 1001;
-        }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 5px; background: var(--neon-pink); transition: width 0.3s ease; z-index: 1001; }
 
         /* SLIDE SYSTEM */
-        .slides-container {
-            width: 100vw;
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
-        }
-
-        .slides-wrapper {
-            width: 100vw;
-            height: 100%;
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
-
+        .slides-container { width: 100vw; height: 100%; overflow: hidden; }
+        .slides-wrapper { width: 100vw; height: 100%; display: flex; transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1); }
         .slide {
-            min-width: 100vw;
-            height: 100%;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            min-width: 100vw; height: 100%; padding: 40px 20px;
+            display: flex; flex-direction: column; position: relative;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
-
-        @media (min-width: 769px) {
-            .slide { padding: 60px 80px; }
-        }
-
-        .bg-accent {
-            position: absolute;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(255, 0, 127, 0.08) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            pointer-events: none;
-        }
+        @media (min-width: 769px) { .slide { padding: 60px 80px; } }
 
         /* TYPOGRAPHY */
         h1, h2, h3 { font-family: 'Poppins', sans-serif; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
         h1 { font-size: clamp(32px, 8vw, 80px); font-weight: 800; line-height: 1.1; }
         h1 span { color: var(--neon-pink); display: block; }
-        
         .slide-title { 
-            font-size: clamp(22px, 4vw, 44px); 
-            font-weight: 800; 
-            margin-bottom: 25px; 
-            border-left: 8px solid var(--neon-pink); 
-            padding-left: 15px; 
-            text-align: left;
+            font-size: clamp(22px, 4vw, 44px); font-weight: 800; 
+            margin-bottom: 25px; border-left: 8px solid var(--neon-pink); 
+            padding-left: 15px; text-align: left;
         }
-
         p, li { font-size: clamp(16px, 2vw, 22px); line-height: 1.4; color: #DDD; }
         strong { color: var(--neon-pink); }
 
         /* COMPONENTS */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            align-items: center;
-            flex-grow: 1;
-        }
-
-        @media (min-width: 1024px) {
-            .content-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-        }
+        .content-grid { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: center; flex-grow: 1; }
+        @media (min-width: 1024px) { .content-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
 
         .tile {
-            background: var(--dark-gray);
-            padding: 25px;
-            border-radius: 20px;
-            border-bottom: 5px solid var(--neon-pink);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background: var(--dark-gray); padding: 30px; border-radius: 20px;
+            border-bottom: 6px solid var(--neon-pink); display: flex;
+            flex-direction: column; justify-content: center;
+        }
+        .tile h3 { color: var(--neon-pink); margin-bottom: 15px; font-size: 26px; }
+
+        /* PROGRESS BAR SQUAD */
+        .squad-progress-container {
+            background: rgba(255, 255, 255, 0.1); border-radius: 15px; height: 25px;
+            width: 100%; margin: 15px 0; position: relative; overflow: hidden; border: 1px solid var(--neon-pink);
+        }
+        .squad-progress-fill {
+            background: linear-gradient(90deg, var(--neon-pink), #ff5eb3);
+            height: 100%; width: 45%; transition: width 1.5s ease-out;
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+        .squad-label {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-weight: 800; font-size: 12px; color: white; width: 100%; text-align: center;
         }
 
-        .tile h3 { color: var(--neon-pink); margin-bottom: 10px; font-size: clamp(20px, 3vw, 26px); }
+        /* ROADMAP */
+        .roadmap-item { display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 12px; margin-bottom: 10px; }
+        .roadmap-item.done { border-left: 4px solid #25D366; }
+        .roadmap-item.done i { color: #25D366; }
+        .roadmap-item.pending { border-left: 4px solid var(--neon-pink); color: #888; }
 
-        .bullet-list { list-style: none; padding: 0; margin: 0; }
-        .bullet-list li { margin-bottom: 15px; padding-left: 45px; position: relative; }
-        .bullet-list li i { position: absolute; left: 0; color: var(--neon-pink); font-size: 26px; top: 2px; }
-
-        /* PINK ACRONYM STYLING */
-        .pink-acronym-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: auto 0;
+        /* BUTTONS */
+        .wa-btn-small {
+            display: inline-flex; align-items: center; gap: 8px; background: #25D366; 
+            color: white; text-decoration: none; padding: 10px 20px; border-radius: 10px;
+            font-weight: bold; font-size: 14px; margin-top: 15px; transition: transform 0.2s;
+        }
+        
+        .spotify-btn {
+            display: inline-flex; align-items: center; gap: 10px; background: #1DB954; color: white;
+            text-decoration: none; padding: 12px 20px; border-radius: 30px; font-weight: bold;
+            font-size: 16px; margin-top: 15px;
         }
 
-        .acronym-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px 20px;
-            border-radius: 15px;
-        }
-
-        .acronym-letter {
-            font-family: 'Poppins';
-            font-size: clamp(36px, 8vw, 60px);
-            font-weight: 800;
-            color: var(--neon-pink);
-            width: 60px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .acronym-content h3 { font-size: clamp(18px, 4vw, 26px); color: var(--rebel-white); margin-bottom: 4px; }
-        .acronym-content p { font-size: clamp(14px, 2.5vw, 18px); color: #AAA; margin: 0; }
-
-        /* WHATSAPP BUTTON */
-        .wa-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 16px;
-            margin-top: 15px;
-            transition: transform 0.2s ease, background 0.3s ease;
-        }
-        .wa-btn:active { transform: scale(0.95); }
-        .wa-btn:hover { background: #1da851; }
-
-        /* PROFILE CARD */
-        .profile-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: var(--dark-gray);
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            border-left: 5px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .profile-img {
-            width: 70px; height: 70px; 
-            border: 3px solid var(--neon-pink);
-            border-radius: 15px;
-            transform: rotate(45deg);
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 0, 127, 0.1);
-            flex-shrink: 0;
-        }
-        .profile-img i { transform: rotate(-45deg); font-size: 30px; color: var(--neon-pink); }
-
-        /* KONTAKT CARD */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media (min-width: 600px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
-
+        /* CONTACT CARDS */
         .contact-card {
-            background: var(--dark-gray);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: var(--dark-gray); border-radius: 20px; padding: 25px;
+            text-align: center; display: flex; flex-direction: column; align-items: center;
         }
         .qr-placeholder {
             width: 160px; height: 160px; background: white;
@@ -259,99 +123,103 @@
         }
         .qr-placeholder img { width: 100%; height: 100%; }
 
-        .contact-name { font-family: 'Poppins'; font-size: 22px; font-weight: 800; color: var(--neon-pink); }
-
-        .back-to-start-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
+        .back-to-start-container { 
+            width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 40px; 
         }
 
+        /* AKRONYM */
+        .pink-acronym-container { display: flex; flex-direction: column; gap: 12px; margin: auto 0; }
+        .acronym-row { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 15px 20px; border-radius: 15px; }
+        .acronym-letter { font-family: 'Poppins'; font-size: clamp(36px, 8vw, 60px); font-weight: 800; color: var(--neon-pink); width: 60px; text-align: center; flex-shrink: 0; }
+        .acronym-content h3 { font-size: clamp(18px, 4vw, 26px); color: var(--rebel-white); margin-bottom: 4px; }
+        .acronym-content p { font-size: clamp(14px, 2.5vw, 18px); color: #AAA; margin: 0; }
+
+        /* PROFILE */
+        .profile-card { display: flex; align-items: center; gap: 20px; background: var(--dark-gray); padding: 20px; border-radius: 20px; margin-bottom: 20px; border-left: 5px solid transparent; }
+        .profile-img { width: 70px; height: 70px; border: 3px solid var(--neon-pink); border-radius: 15px; transform: rotate(45deg); display: flex; align-items: center; justify-content: center; background: rgba(255, 0, 127, 0.1); flex-shrink: 0; }
+        .profile-img i { transform: rotate(-45deg); font-size: 30px; color: var(--neon-pink); }
     </style>
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
     <div class="progress-bar" id="progressBar"></div>
 
     <div class="controls">
-        <button class="nav-btn" onclick="prevSlide()" aria-label="Zurück"><i class="fas fa-chevron-left"></i></button>
-        <button class="nav-btn" onclick="nextSlide()" aria-label="Weiter"><i class="fas fa-chevron-right"></i></button>
+        <button class="nav-btn" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+        <button class="nav-btn" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <div class="slides-container" id="slidesContainer">
         <div class="slides-wrapper" id="slidesWrapper">
             
-            <!-- SLIDE 1: INTRO -->
+            <!-- FOLIE 1: INTRO -->
             <div class="slide">
-                <div class="bg-accent" style="top: -10%; right: -10%;"></div>
                 <div style="margin: auto; text-align: center;">
                     <h1>WERDE EIN <span>REBEL!</span></h1>
                     <p style="margin-top: 30px; color: #AAA; font-size: clamp(18px, 3vw, 24px);">Schluss mit langweiligem Handball. Starte deine neue Ära.</p>
                     <div style="margin-top: 50px;">
                         <p style="font-weight: 800; color: var(--rebel-white); font-size: clamp(24px, 5vw, 32px);">PINK REBELS</p>
-                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: clamp(14px, 2vw, 18px);">
-                            HSG Rü/Bau/Kö | Damenhandball Neustart 2026
-                        </p>
+                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">HSG Rü/Bau/Kö | Damenhandball Neustart 2026</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 2: DER VIBE -->
+            <!-- FOLIE 2: DAS MANIFEST (OFFENER LOOK) -->
+            <div class="slide">
+                <div style="margin: auto; text-align: center; max-width: 900px;">
+                    <p style="font-family: 'Poppins'; font-size: clamp(24px, 5vw, 40px); font-weight: 800; line-height: 1.2;">
+                        Gegen den Strom. <br>
+                        Gegen verstaubte Strukturen. <br>
+                        Für den Sport, den wir lieben – nach unseren Regeln.
+                    </p>
+                    <span style="color: var(--neon-pink); font-size: clamp(30px, 6vw, 50px); font-weight: 800; display: block; margin-top: 30px;">WIR SIND DER NEUSTART.</span>
+                </div>
+            </div>
+
+            <!-- FOLIE 3: DER VIBE -->
             <div class="slide">
                 <h2 class="slide-title">Warum die Rebels?</h2>
                 <div class="content-grid">
                     <div>
                         <p>Du hast keine Lust mehr auf verstaubte Vereinsstrukturen? Wir auch nicht.</p>
-                        <ul class="bullet-list">
-                            <li><i class="fas fa-fire"></i> <strong>Energy:</strong> Ein Team, das Bock auf modernen Power-Handball hat.</li>
-                            <li><i class="fas fa-star"></i> <strong>Style:</strong> Die geilsten Trikots der Liga und ein echtes Branding.</li>
-                            <li><i class="fas fa-heart"></i> <strong>Community:</strong> Zusammenhalt, der über die Halle hinausgeht.</li>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li style="margin-bottom: 15px;"><strong style="color:var(--neon-pink); font-size: 1.2em;">#ENERGY:</strong> Power-Handball, der rockt.</li>
+                            <li style="margin-bottom: 15px;"><strong style="color:var(--neon-pink); font-size: 1.2em;">#STYLE:</strong> Die geilsten Trikots der Region.</li>
+                            <li style="margin-bottom: 15px;"><strong style="color:var(--neon-pink); font-size: 1.2em;">#COMMUNITY:</strong> Echter Zusammenhalt.</li>
                         </ul>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: clamp(100px, 25vw, 160px); color: var(--neon-pink);"><i class="fas fa-hand-fist"></i></div>
-                        <p style="font-family: 'Poppins'; font-weight: 800; font-size: clamp(20px, 4vw, 36px);">DEIN TEAM. DEIN STYLE.</p>
+                        <div style="font-size: clamp(100px, 25vw, 150px); color: var(--neon-pink);"><i class="fas fa-hand-fist"></i></div>
+                        <p style="font-family: 'Poppins'; font-weight: 800; font-size: 24px;">DEIN TEAM. DEIN STYLE.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 3: P.I.N.K. (PLAYER VERSION) -->
+            <!-- FOLIE 4: P.I.N.K. -->
             <div class="slide">
                 <h2 class="slide-title">Was dich erwartet: P.I.N.K.</h2>
                 <div class="pink-acronym-container">
                     <div class="acronym-row">
                         <div class="acronym-letter">P</div>
-                        <div class="acronym-content">
-                            <h3>Performance</h3>
-                            <p>Wir fördern deine Stärken mit modernem Coaching.</p>
-                        </div>
+                        <div class="acronym-content"><h3>Performance</h3><p>Wir fördern deine Stärken mit modernem Coaching.</p></div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">I</div>
-                        <div class="acronym-content">
-                            <h3>Individualität</h3>
-                            <p>Egal ob du reaktivieren willst oder Top-Talent bist – du zählst.</p>
-                        </div>
+                        <div class="acronym-content"><h3>Individualität</h3><p>Egal ob du reaktivieren willst oder Top-Talent bist – du zählst.</p></div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">N</div>
-                        <div class="acronym-content">
-                            <h3>Next Level</h3>
-                            <p>Bring dein Spiel und unser Team auf die nächste Stufe.</p>
-                        </div>
+                        <div class="acronym-content"><h3>Next Level</h3><p>Bring dein Spiel und unser Team auf die nächste Stufe.</p></div>
                     </div>
                     <div class="acronym-row">
                         <div class="acronym-letter">K</div>
-                        <div class="acronym-content">
-                            <h3>Kampfgeist</h3>
-                            <p>Gemeinsam wachsen. Gemeinsam gewinnen. Gemeinsam feiern.</p>
-                        </div>
+                        <div class="acronym-content"><h3>Kampfgeist</h3><p>Gemeinsam wachsen. Gemeinsam gewinnen. Gemeinsam feiern.</p></div>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 4: DAS VERSPRECHEN -->
+            <!-- FOLIE 5: UNSER VERSPRECHEN (REVERTED TO TWO TILES) -->
             <div class="slide">
                 <h2 class="slide-title">Unser Versprechen an dich</h2>
                 <div class="content-grid">
@@ -366,20 +234,28 @@
                 </div>
             </div>
 
-            <!-- SLIDE 5: WER WIR SUCHEN -->
+            <!-- FOLIE 6: ROADMAP & SQUAD (WITH PROGRESS BAR) -->
             <div class="slide">
-                <h2 class="slide-title">Suchst du uns?</h2>
-                <div style="margin: auto; width: 100%;">
-                    <ul class="bullet-list">
-                        <li><i class="fas fa-check-double"></i> <strong>Die Reaktivierer:</strong> Du hast früher gespielt und vermisst den Ball? Komm zurück!</li>
-                        <li><i class="fas fa-check-double"></i> <strong>Die Young Guns:</strong> Du spielst wA und willst ein Damen-Projekt, das brennt?</li>
-                        <li><i class="fas fa-check-double"></i> <strong>Die Wechsler:</strong> Du suchst eine neue Herausforderung in der Region?</li>
-                    </ul>
-                    <p style="margin-top: 30px; text-align: center; font-size: clamp(20px, 4vw, 28px); color: var(--neon-pink);"><strong>Egal woher du kommst – wir wollen dein Feuer!</strong></p>
+                <h2 class="slide-title">Roadmap & Squad</h2>
+                <div class="content-grid">
+                    <div>
+                        <p style="font-weight: bold; margin-bottom: 10px;">JOIN THE SQUAD</p>
+                        <div class="squad-progress-container">
+                            <div class="squad-progress-fill"></div>
+                            <div class="squad-label">7 / 16 Plätzen belegt</div>
+                        </div>
+                        <p style="font-size: 14px; color: #AAA;">Werde Teil der Gründungs-Formation!</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div class="roadmap-item done"><i class="fas fa-check-circle"></i> Branding & Logo fix</div>
+                        <div class="roadmap-item done"><i class="fas fa-check-circle"></i> Trainerteam fix</div>
+                        <div class="roadmap-item pending"><i class="fas fa-clock"></i> Hallenzeiten (In Planung)</div>
+                        <div class="roadmap-item pending"><i class="fas fa-clock"></i> Trikot-Design Finalisierung</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- SLIDE 6: TEAM & FUN -->
+            <!-- FOLIE 7: TEAM & FUN (REVERTED CONTENT) -->
             <div class="slide">
                 <h2 class="slide-title">Mehr als 60 Minuten</h2>
                 <div class="content-grid">
@@ -388,13 +264,16 @@
                         <p>Trainingslager, Teambuilding und legendäre Kabinenpartys sind fest eingeplant.</p>
                     </div>
                     <div style="text-align: center; color: var(--neon-pink);">
-                        <div style="font-size: clamp(80px, 15vw, 120px);"><i class="fas fa-glass-cheers"></i></div>
-                        <p style="font-weight: 800; font-size: clamp(18px, 3vw, 24px);">REBELS DON'T JUST PLAY.<br>REBELS CELEBRATE.</p>
+                        <div style="font-size: clamp(60px, 12vw, 100px);"><i class="fas fa-glass-cheers"></i></div>
+                        <p style="font-weight: 800; font-size: clamp(18px, 3vw, 24px); margin: 15px 0;">REBELS DON'T JUST PLAY.<br>REBELS CELEBRATE.</p>
+                        <a href="https://open.spotify.com/playlist/37i9dQZF1DXdxcBWu9YQLh" target="_blank" class="spotify-btn">
+                            <i class="fab fa-spotify"></i> REBEL PLAYLIST
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 7: SAISONPLANUNG -->
+            <!-- FOLIE 8: SAISONPLANUNG (REVERTED CONTENT) -->
             <div class="slide">
                 <h2 class="slide-title">Unser Plan: Saison & Groove</h2>
                 <div class="content-grid">
@@ -410,66 +289,84 @@
                 <p style="margin-top: 20px; text-align: center; font-size: clamp(18px, 3vw, 22px); color: var(--neon-pink);"><strong>Erst die Basis, dann die Dominanz.</strong></p>
             </div>
 
-            <!-- SLIDE 8: MANAGEMENT -->
+            <!-- FOLIE 9: SAVE THE DATE -->
             <div class="slide">
-                <h2 class="slide-title">Wer den Rücken freihält</h2>
+                <h2 class="slide-title">Save the Date</h2>
+                <div style="margin: auto; text-align: center; width: 100%;">
+                    <div class="tile" style="max-width: 500px; margin: 0 auto; border-bottom-color: white;">
+                        <h3 style="color: white;">Erstes Rebel-Meeting</h3>
+                        <p style="font-size: 24px; font-weight: 800; color: var(--neon-pink); margin: 10px 0;">Samstag, 14.02.2026</p>
+                        <p style="font-size: 18px; margin-bottom: 20px;">18:00 Uhr | Sporthalle Bauschheim</p>
+                        <div style="display:flex; flex-direction:column; gap:10px;">
+                            <button onclick="downloadICS()" class="nav-btn" style="width: 100%; border-radius: 10px; font-size: 14px; font-weight: bold;">
+                                <i class="fas fa-apple-whole"></i> FÜR APPLE / NATIV (ICS)
+                            </button>
+                            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pink+Rebels+Kick-off&details=Erstes+Treffen+der+neuen+Damenmannschaft!&location=Sporthalle+Bauschheim" target="_blank" class="nav-btn" style="width: 100%; border-radius: 10px; font-size: 14px; font-weight: bold; background: rgba(255,255,255,0.1);">
+                                <i class="fab fa-google"></i> FÜR GOOGLE KALENDER
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLIE 10: MANAGEMENT -->
+            <div class="slide">
+                <h2 class="slide-title">Support Team</h2>
                 <div class="content-grid">
                     <div>
                         <div class="profile-card">
                             <div class="profile-img"><i class="fas fa-users-gear"></i></div>
-                            <div>
-                                <h3>Lena Kugies</h3>
-                                <p style="font-size: 16px;">Deine Ansprechpartnerin für Orga & Team-Spirit.</p>
-                            </div>
+                            <div><h3>Lena Kugies</h3><p style="font-size: 16px;">Orga & Spirit.</p></div>
                         </div>
                         <div class="profile-card">
                             <div class="profile-img"><i class="fas fa-chess-knight"></i></div>
-                            <div>
-                                <h3>Kai-Uwe König</h3>
-                                <p style="font-size: 16px;">Der Kopf hinter der Strategie & dem Sponsoring.</p>
-                            </div>
+                            <div><h3>Kai-Uwe König</h3><p style="font-size: 16px;">Strategie.</p></div>
                         </div>
                     </div>
                     <div class="tile">
-                        <h3>Support-Garantie</h3>
-                        <p>Wir sind für euch da. Von der Trikotbestellung bis zum individuellen Sponsoring-Deal.</p>
+                        <h3>Euer Support</h3>
+                        <p>Wir halten euch den Rücken frei, damit ihr euch auf den Ball konzentrieren könnt.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 9: KONTAKT -->
+            <!-- FOLIE 11: KONTAKT (WITH BOTH WA BUTTONS) -->
             <div class="slide">
-                <h2 class="slide-title">Werde jetzt ein Rebel!</h2>
-                <div class="contact-grid">
+                <h2 class="slide-title">Werde ein Rebel!</h2>
+                <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div class="contact-card">
                         <div class="qr-placeholder">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BEGIN:VCARD%0AVERSION:3.0%0AFN:Lena%20Kugies%0AN:Kugies;Lena;;;%0AEMAIL:lenakugies99@web.de%0ATEL;TYPE=CELL:01637844242%0AORG:HSG%20Rue/Bau/Koe%0AEND:VCARD" alt="QR Lena">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/491637844242" alt="QR Lena">
                         </div>
-                        <div class="contact-name">Schreib Lena</div>
-                        <a href="https://wa.me/491637844242?text=Hey%20Lena,%20ich%20habe%20die%20Rebels-Präsi%20gesehen%20und%20hab%20Bock!" class="wa-btn" target="_blank">
+                        <span style="font-weight: 800; font-size: 20px; color: var(--neon-pink);">LENA</span>
+                        <a href="https://wa.me/491637844242?text=Hi%20Lena,%20ich%20will%20ein%20Rebel%20werden!" class="wa-btn-small" target="_blank">
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
                     </div>
                     <div class="contact-card">
                         <div class="qr-placeholder">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=BEGIN:VCARD%0AVERSION:3.0%0AFN:Kai-Uwe%20Koenig%0AN:Koenig;Kai-Uwe;;;%0AEMAIL:kaiuwe.koenig@web.de%0ATEL;TYPE=CELL:015123008915%0AORG:HSG%20Rue/Bau/Koe%0AEND:VCARD" alt="QR Kai">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/4915123008915" alt="QR Kai">
                         </div>
-                        <div class="contact-name">Schreib Kai</div>
-                        <a href="https://wa.me/4915123008915?text=Hey%20Kai,%20ich%20habe%20die%20Rebels-Präsi%20gesehen%20und%20hab%20Interesse%20an%20einer%20Kooperation!" class="wa-btn" target="_blank">
+                        <span style="font-weight: 800; font-size: 20px; color: var(--neon-pink);">KAI</span>
+                        <a href="https://wa.me/4915123008915?text=Hi%20Kai,%20ich%20habe%20Interesse%20an%20den%20Rebels!" class="wa-btn-small" target="_blank">
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </a>
                     </div>
                 </div>
-                <p style="margin-top: 30px; text-align: center; font-size: clamp(16px, 3vw, 20px); color: var(--neon-pink);"><strong>Scan den Code & sag "Hi! Ich will ein Rebel werden."</strong></p>
+                <div style="text-align: center; margin-top: 25px;">
+                    <a href="https://wa.me/?text=Hey!%20Schau%20dir%20mal%20die%20Pink%20Rebels%20an.%20Kommst%20du%20mit?%20https://kkoenig87.github.io/Pink-Rebels/rebellion.html" class="wa-btn-small" style="background: var(--neon-pink); border-radius: 30px; padding: 12px 25px;">
+                        <i class="fas fa-users"></i> BESTE FREUNDIN EINLADEN
+                    </a>
+                </div>
             </div>
 
-            <!-- SLIDE 10: OUTRO -->
+            <!-- FOLIE 12: OUTRO -->
             <div class="slide">
                 <div style="margin: auto; text-align: center; width: 100%;">
-                    <h1 style="font-size: clamp(40px, 10vw, 120px);">DEINE <span>REBELLION</span></h1>
-                    <h2 style="font-size: clamp(24px, 5vw, 40px); margin-top: 10px;">BEGINNT JETZT.</h2>
+                    <h1>DEINE <span>REBELLION</span></h1>
+                    <h2 style="font-size: 28px; margin-top: 10px;">BEGINNT JETZT.</h2>
                     <div class="back-to-start-container">
-                        <button class="nav-btn" style="width: auto; border-radius: 10px; padding: 0 40px; font-weight: bold;" onclick="goToSlide(0)">
+                        <button class="nav-btn" style="width: auto; border-radius: 10px; padding: 0 40px; font-weight: bold; margin: 0 auto;" onclick="goToSlide(0)">
                             ZURÜCK ZUM START
                         </button>
                     </div>
@@ -480,60 +377,48 @@
     </div>
 
     <script>
+        // BACKGROUND ANIMATION
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 80 + 40; this.speedX = Math.random() * 0.4 - 0.2; this.speedY = Math.random() * 0.4 - 0.2; this.opacity = Math.random() * 0.4; }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x < -100 || this.x > canvas.width + 100) this.reset(); }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `rgba(255, 0, 127, ${this.opacity * 0.1})`; ctx.fill(); }
+        }
+        for (let i = 0; i < 15; i++) particles.push(new Particle());
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        animate();
+
+        // SLIDE NAVIGATION
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const wrapper = document.getElementById('slidesWrapper');
         const progressBar = document.getElementById('progressBar');
-
         function updateSlide() {
             wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
             progressBar.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
             slides[currentSlide].scrollTop = 0;
         }
+        function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+        function goToSlide(index) { currentSlide = index; updateSlide(); }
 
-        function nextSlide() {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                updateSlide();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlide();
-            }
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlide();
-        }
-
-        // Swipe Gesten
+        // Gestures & Keys
         let touchstartX = 0;
-        let touchendX = 0;
-        
-        document.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        }, {passive: true});
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX, {passive: true});
+        document.addEventListener('touchend', e => { let x = e.changedTouches[0].screenX; if (x < touchstartX - 50) nextSlide(); if (x > touchstartX + 50) prevSlide(); }, {passive: true});
+        document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') nextSlide(); if (e.key === 'ArrowLeft') prevSlide(); });
 
-        document.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleGesture();
-        }, {passive: true});
-
-        function handleGesture() {
-            if (touchendX < touchstartX - 50) nextSlide();
-            if (touchendX > touchstartX + 50) prevSlide();
+        function downloadICS() {
+            const icsData = ["BEGIN:VCALENDAR","VERSION:2.0","BEGIN:VEVENT","DTSTART:20260214T170000Z","DTEND:20260214T193000Z","SUMMARY:Pink Rebels Kick-off","LOCATION:Sporthalle Bauschheim","DESCRIPTION:Erstes Treffen der neuen Damenmannschaft!","END:VEVENT","END:VCALENDAR"].join("\r\n");
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a'); link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'PinkRebels_Kickoff.ics'); link.click();
         }
-
-        // Tastatur
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
-
         updateSlide();
     </script>
 </body>
