@@ -30,6 +30,13 @@
             position: relative;
         }
 
+        /* LOGO COMPONENT */
+        .rebel-logo {
+            width: 80px; height: 80px; margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .rebel-logo svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px var(--neon-pink)); }
+
         /* LOADING SCREEN */
         #loading-screen {
             position: fixed;
@@ -43,8 +50,8 @@
             transition: opacity 0.8s ease;
         }
         .loader-content { text-align: center; width: 90%; max-width: 500px; }
-        .loader-logo {
-            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(22px, 6vw, 42px);
+        .loader-logo-text {
+            font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(22px, 6vw, 38px);
             color: var(--neon-pink); letter-spacing: 1px; margin-bottom: 25px;
             animation: pulse 1.5s infinite; text-transform: uppercase; line-height: 1.2;
         }
@@ -57,7 +64,6 @@
             box-shadow: 0 0 15px var(--neon-pink); 
         }
 
-        /* Ladebalken Animation (5s) */
         .animate-bar { animation: loadProgress 5s forwards cubic-bezier(0.42, 0, 0.58, 1); }
 
         @keyframes loadProgress { 
@@ -125,14 +131,6 @@
             flex-direction: column; justify-content: center;
         }
 
-        .swipe-hint {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            color: var(--neon-pink); font-weight: bold; opacity: 0;
-            animation: fadeInOut 3s infinite; pointer-events: none;
-            display: flex; flex-direction: column; align-items: center; gap: 5px;
-        }
-        @keyframes fadeInOut { 0%, 100% { opacity: 0; transform: translate(-50%, 0); } 50% { opacity: 0.8; transform: translate(-50%, -10px); } }
-
         /* SQUAD PROGRESS */
         .squad-progress-container {
             background: rgba(255, 255, 255, 0.1); border-radius: 15px; height: 25px;
@@ -140,12 +138,6 @@
         }
         .squad-progress-fill { background: linear-gradient(90deg, var(--neon-pink), #ff5eb3); height: 100%; width: 0%; transition: width 1.5s ease-out; box-shadow: 0 0 10px var(--neon-pink); }
         .squad-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 12px; color: white; width: 100%; text-align: center; }
-
-        /* ROADMAP */
-        .roadmap-item { display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 12px; margin-bottom: 10px; }
-        .roadmap-item.done { border-left: 4px solid #25D366; }
-        .roadmap-item.done i { color: #25D366; }
-        .roadmap-item.pending { border-left: 4px solid var(--neon-pink); color: #888; }
 
         /* CONTACT CARDS */
         .compact-contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
@@ -156,7 +148,7 @@
 
         .back-to-start-container { width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 40px; }
 
-        /* HELPERS */
+        /* AKRONYM */
         .pink-acronym-container { display: flex; flex-direction: column; gap: 12px; margin: auto 0; }
         .acronym-row { display: flex; align-items: center; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 15px 20px; border-radius: 15px; }
         .acronym-letter { font-family: 'Poppins'; font-size: clamp(36px, 8vw, 60px); font-weight: 800; color: var(--neon-pink); width: 60px; text-align: center; flex-shrink: 0; }
@@ -168,6 +160,19 @@
         .profile-img i { transform: rotate(-45deg); font-size: 30px; color: var(--neon-pink); }
 
         #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2000; }
+
+        .swipe-hint {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: var(--neon-pink); font-weight: bold; opacity: 0;
+            animation: fadeInOut 3s infinite; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center; gap: 5px;
+        }
+        @keyframes fadeInOut { 0%, 100% { opacity: 0; transform: translate(-50%, 0); } 50% { opacity: 0.8; transform: translate(-50%, -10px); } }
+
+        .roadmap-item { display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 12px; margin-bottom: 10px; }
+        .roadmap-item.done { border-left: 4px solid #25D366; }
+        .roadmap-item.done i { color: #25D366; }
+        .roadmap-item.pending { border-left: 4px solid var(--neon-pink); color: #888; }
     </style>
 </head>
 <body onload="initCounters()">
@@ -175,8 +180,14 @@
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
         <div class="loader-content">
-            <div class="loader-logo">DIE REBELLION STARTET JETZT</div>
-            <div class="loader-text">UNITED REBELS by HSG RÜ/BAU/KÖ</div>
+            <div class="rebel-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" fill="none" stroke="#FF007F" stroke-width="3"/>
+                    <text x="50" y="65" font-family="Poppins" font-size="35" font-weight="800" fill="#FF007F" text-anchor="middle">UR</text>
+                </svg>
+            </div>
+            <div class="loader-logo-text">DIE REBELLION STARTET JETZT</div>
+            <div class="loader-text">UNITED REBELS powered by HSG RÜ/BAU/KÖ</div>
             <div class="loader-bar-container">
                 <div class="loader-bar-fill" id="loader-fill"></div>
             </div>
@@ -198,6 +209,12 @@
             <!-- FOLIE 0: DECKBLATT -->
             <div class="slide">
                 <div style="margin: auto; text-align: center; width: 100%;">
+                    <div class="rebel-logo" style="width: 120px; height: 120px;">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" fill="none" stroke="#FF007F" stroke-width="3"/>
+                            <text x="50" y="65" font-family="Poppins" font-size="35" font-weight="800" fill="#FF007F" text-anchor="middle">UR</text>
+                        </svg>
+                    </div>
                     <h1>DEINE <span>REBELLION</span></h1>
                     <h2 style="font-size: 28px; margin-top: 10px;">BEGINNT JETZT.</h2>
                     <div class="back-to-start-container">
@@ -215,7 +232,7 @@
                     <p style="margin-top: 30px; color: #AAA; font-size: clamp(18px, 3vw, 24px);">Schluss mit langweiligem Handball. Starte deine neue Ära.</p>
                     <div style="margin-top: 50px;">
                         <p style="font-weight: 800; color: var(--rebel-white); font-size: clamp(24px, 5vw, 32px);">UNITED REBELS</p>
-                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">HSG Rü/Bau/Kö | Damenhandball Neustart <span class="counter" data-target="2026">0</span></p>
+                        <p style="color: var(--neon-pink); text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">powered by HSG Rü/Bau/Kö | Damenhandball Neustart <span class="counter" data-target="2026">0</span></p>
                     </div>
                 </div>
                 <div class="swipe-hint"><span>Wische zum Starten</span><i class="fas fa-chevron-right"></i></div>
@@ -252,22 +269,10 @@
             <div class="slide">
                 <h2 class="slide-title">Das Versprechen: P.I.N.K.</h2>
                 <div class="pink-acronym-container">
-                    <div class="acronym-row">
-                        <div class="acronym-letter">P</div>
-                        <div class="acronym-content"><h3>Performance</h3><p>Wir fördern deine Stärken mit modernem Coaching.</p></div>
-                    </div>
-                    <div class="acronym-row">
-                        <div class="acronym-letter">I</div>
-                        <div class="acronym-content"><h3>Individualität</h3><p>Egal ob du reaktivieren willst oder Top-Talent bist – du zählst.</p></div>
-                    </div>
-                    <div class="acronym-row">
-                        <div class="acronym-letter">N</div>
-                        <div class="acronym-content"><h3>Next Level</h3><p>Bring dein Spiel auf eine neue Stufe.</p></div>
-                    </div>
-                    <div class="acronym-row">
-                        <div class="acronym-letter">K</div>
-                        <div class="acronym-content"><h3>Kampfgeist</h3><p>Gemeinsam wachsen. Gemeinsam gewinnen. Gemeinsam feiern.</p></div>
-                    </div>
+                    <div class="acronym-row"><div class="acronym-letter">P</div><div class="acronym-content"><h3>Performance</h3><p>Wir fördern deine Stärken mit modernem Coaching.</p></div></div>
+                    <div class="acronym-row"><div class="acronym-letter">I</div><div class="acronym-content"><h3>Individualität</h3><p>Egal ob du reaktivieren willst oder Top-Talent bist – du zählst.</p></div></div>
+                    <div class="acronym-row"><div class="acronym-letter">N</div><div class="acronym-content"><h3>Next Level</h3><p>Bring dein Spiel auf eine neue Stufe.</p></div></div>
+                    <div class="acronym-row"><div class="acronym-letter">K</div><div class="acronym-content"><h3>Kampfgeist</h3><p>Gemeinsam wachsen. Gemeinsam gewinnen. Gemeinsam feiern.</p></div></div>
                 </div>
             </div>
 
@@ -275,14 +280,8 @@
             <div class="slide">
                 <h2 class="slide-title">Unser Versprechen an dich</h2>
                 <div class="content-grid">
-                    <div class="tile">
-                        <h3>Kein Stress, nur Handball</h3>
-                        <p>Wir kümuren uns um die Orga. Du konzentrierst dich auf dein Spiel und das Team.</p>
-                    </div>
-                    <div class="tile">
-                        <h3>Maximale Sichtbarkeit</h3>
-                        <p>Professionalisierung auf Social Media. Wir machen euch zu den Gesichtern der HSG.</p>
-                    </div>
+                    <div class="tile"><h3>Kein Stress, nur Handball</h3><p>Wir kümmern uns um die Orga. Du konzentrierst dich auf dein Spiel und das Team.</p></div>
+                    <div class="tile"><h3>Maximale Sichtbarkeit</h3><p>Professionalisierung auf Social Media. Wir machen euch zu den Gesichtern der HSG.</p></div>
                 </div>
             </div>
 
@@ -307,26 +306,19 @@
                 </div>
             </div>
 
-            <!-- FOLIE 7: TEAM & FUN (MIT SPOTIFY EMBED) -->
+            <!-- FOLIE 7: TEAM & FUN -->
             <div class="slide">
                 <h2 class="slide-title">Mehr als 60 Minuten</h2>
                 <div class="content-grid">
                     <div class="tile">
                         <h3>Team-Events</h3>
                         <p>Trainingslager, Teambuilding und legendäre Kabinenpartys sind fest eingeplant.</p>
-                        
-                        <!-- Piktogramm & Slogan -->
                         <div style="text-align: center; margin-top: 25px;">
-                            <div style="font-size: clamp(60px, 12vw, 100px); color: var(--neon-pink); margin-bottom: 15px;">
-                                <i class="fas fa-glass-cheers"></i>
-                            </div>
-                            <p style="font-weight: 800; color: var(--neon-pink); font-size: clamp(16px, 3vw, 22px); line-height: 1.2;">
-                                REBELS DON'T JUST PLAY.<br>REBELS CELEBRATE.
-                            </p>
+                            <div style="font-size: clamp(60px, 12vw, 100px); color: var(--neon-pink); margin-bottom: 15px;"><i class="fas fa-glass-cheers"></i></div>
+                            <p style="font-weight: 800; color: var(--neon-pink); font-size: clamp(16px, 3vw, 22px); line-height: 1.2;">REBELS DON'T JUST PLAY.<br>REBELS CELEBRATE.</p>
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <!-- Spotify Iframe Integration -->
                         <iframe data-testid="embed-iframe" style="border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" src="https://open.spotify.com/embed/playlist/0ATXpHGpuf8lEEdkH01W9m?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                     </div>
                 </div>
@@ -391,6 +383,12 @@
             <!-- FOLIE 12: OUTRO -->
             <div class="slide">
                 <div style="margin: auto; text-align: center; width: 100%;">
+                    <div class="rebel-logo">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 5 L90 27.5 L90 72.5 L50 95 L10 72.5 L10 27.5 Z" fill="none" stroke="#FF007F" stroke-width="3"/>
+                            <text x="50" y="65" font-family="Poppins" font-size="35" font-weight="800" fill="#FF007F" text-anchor="middle">UR</text>
+                        </svg>
+                    </div>
                     <h1>DEINE <span>REBELLION</span></h1>
                     <h2 style="font-size: 28px; margin-top: 10px;">BEGINNT JETZT.</h2>
                     <div class="back-to-start-container">
@@ -515,13 +513,12 @@
                 loader.style.opacity = '1';
                 loaderFill.classList.add('animate-bar');
                 
-                // FIX: Während der Loader aktiv ist, springen wir sofort zur nächsten Folie.
-                // Da der Loader z-index 9999 hat, geschieht dies unsichtbar im Hintergrund.
+                // Übergang im Hintergrund vorbereiten
                 currentSlide = 1;
                 updateSlide();
             }, 10);
 
-            // Loader bleibt nun 5 Sekunden aktiv
+            // Loader bleibt 5 Sekunden aktiv
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => {
